@@ -5,7 +5,6 @@ import { Providers } from './providers'
 import Header from './components/Header'
 import BottomNav from './components/BottomNav'
 import NotificationManager from './components/NotificationManager'
-import InstallPrompt from './components/InstallPrompt'
 import PWARegister from './components/PWARegister'
 import PostComposer from './components/PostComposer' // We'll update this to be FAB
 
@@ -48,7 +47,6 @@ export default function RootLayout({
             <main className="w-full max-w-md lg:max-w-5xl xl:max-w-6xl min-h-screen pb-32 relative shadow-2xl bg-background overflow-hidden">
               <Header />
               <NotificationManager />
-              <InstallPrompt />
               <PWARegister />
               <div className="p-4 pt-20">
                 {children}
