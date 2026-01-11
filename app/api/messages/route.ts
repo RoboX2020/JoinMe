@@ -104,7 +104,8 @@ export async function GET(request: Request) {
     const myId = session.user.id;
 
     try {
-        // fetch all messages involved
+        // More efficient: fetch only recent messages to build conversation list
+        // Limit to 200 most recent messages (enough to find ~50-100 unique conversations)
         const messages = await prisma.message.findMany({
             where: {
                 OR: [
@@ -113,7 +114,14 @@ export async function GET(request: Request) {
                 ]
             },
             orderBy: { createdAt: 'desc' },
-            include: {
+            take: 200, // Limit query size - will capture recent conversations
+            select: {
+                id: true,
+                content: true,
+                type: true,
+                senderId: true,
+                receiverId: true,
+                createdAt: true,
                 sender: { select: { id: true, name: true, image: true } },
                 receiver: { select: { id: true, name: true, image: true } }
             }
@@ -142,7 +150,12 @@ export async function GET(request: Request) {
             }
         });
 
-        return NextResponse.json(Array.from(conversations.values()));
+        // Return max 50 most recent conversations
+        const conversationList = Array.from(conversations.values())
+            .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+            .slice(0, 50);
+
+        return NextResponse.json(conversationList);
     } catch (error) {
         console.error('Error fetching conversations:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

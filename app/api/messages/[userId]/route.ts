@@ -16,17 +16,50 @@ export async function GET(request: Request, { params }: { params: Promise<{ user
     const myId = session.user.id;
     const { userId: otherId } = await params;
 
+    // Parse query parameters for pagination and incremental updates
+    const { searchParams } = new URL(request.url);
+    const take = parseInt(searchParams.get('take') || '50'); // Default 50 messages
+    const skip = parseInt(searchParams.get('skip') || '0'); // For pagination
+    const since = searchParams.get('since'); // ISO timestamp for incremental updates
+
     try {
+        // Build where clause
+        const whereClause: any = {
+            OR: [
+                { senderId: myId, receiverId: otherId },
+                { senderId: otherId, receiverId: myId }
+            ]
+        };
+
+        // If 'since' is provided, only fetch messages newer than that timestamp
+        if (since) {
+            whereClause.createdAt = {
+                gt: new Date(since)
+            };
+        }
+
         const messages = await prisma.message.findMany({
-            where: {
-                OR: [
-                    { senderId: myId, receiverId: otherId },
-                    { senderId: otherId, receiverId: myId }
-                ]
-            },
+            where: whereClause,
             orderBy: { createdAt: 'desc' },
-            include: {
-                sender: { select: { name: true, image: true } }
+            take: Math.min(take, 100), // Max 100 messages per request
+            skip: skip,
+            select: {
+                id: true,
+                content: true,
+                type: true,
+                senderId: true,
+                receiverId: true,
+                createdAt: true,
+                imageUrl: true,
+                latitude: true,
+                longitude: true,
+                read: true,
+                sender: {
+                    select: {
+                        name: true,
+                        image: true
+                    }
+                }
             }
         });
 

@@ -21,6 +21,11 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 })
         }
 
+        // Parse pagination parameters
+        const { searchParams } = new URL(req.url);
+        const take = parseInt(searchParams.get('take') || '50');
+        const skip = parseInt(searchParams.get('skip') || '0');
+
         // Get all join requests for user's posts
         const joinRequests = await prisma.joinRequest.findMany({
             where: {
@@ -47,7 +52,9 @@ export async function GET(req: NextRequest) {
             },
             orderBy: {
                 createdAt: 'desc'
-            }
+            },
+            take: Math.min(take, 100), // Max 100 per request
+            skip: skip
         })
 
         return NextResponse.json(joinRequests)

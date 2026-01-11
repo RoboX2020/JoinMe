@@ -39,6 +39,9 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const lat = parseFloat(searchParams.get('lat') || '0');
     const lng = parseFloat(searchParams.get('lng') || '0');
+    const take = parseInt(searchParams.get('take') || '30'); // Default 30 posts
+    const skip = parseInt(searchParams.get('skip') || '0'); // For pagination
+    const since = searchParams.get('since'); // ISO timestamp for incremental updates
 
     // Default radius 1km, could be dynamic later
     const radius = 1;
@@ -46,18 +49,28 @@ export async function GET(request: Request) {
     const latRange = 0.02;
     const lngRange = 0.02;
 
-    const posts = await prisma.post.findMany({
-        where: {
-            active: true,
-            latitude: {
-                gte: lat - latRange,
-                lte: lat + latRange,
-            },
-            longitude: {
-                gte: lng - lngRange,
-                lte: lng + lngRange
-            }
+    // Build where clause
+    const whereClause: any = {
+        active: true,
+        latitude: {
+            gte: lat - latRange,
+            lte: lat + latRange,
         },
+        longitude: {
+            gte: lng - lngRange,
+            lte: lng + lngRange
+        }
+    };
+
+    // If 'since' is provided, only fetch posts newer than that timestamp
+    if (since) {
+        whereClause.createdAt = {
+            gt: new Date(since)
+        };
+    }
+
+    const posts = await prisma.post.findMany({
+        where: whereClause,
         include: {
             author: {
                 select: { name: true, image: true, id: true }
@@ -68,9 +81,12 @@ export async function GET(request: Request) {
         },
         orderBy: {
             createdAt: 'desc'
-        }
+        },
+        take: Math.min(take, 50), // Max 50 posts per request
+        skip: skip
     });
 
+    // Filter by exact radius
     const filtered = posts.filter((post: { latitude: number; longitude: number }) => {
         const d = getDistanceFromLatLonInKm(lat, lng, post.latitude, post.longitude);
         return d <= radius;

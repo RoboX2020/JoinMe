@@ -35,7 +35,11 @@ export async function GET(request: Request) {
             latitude: true,
             longitude: true,
             createdAt: true
-        }
+        },
+        orderBy: {
+            createdAt: 'desc'
+        },
+        take: 20 // Limit to 20 most recent notifications
     });
 
     // Filter 1km

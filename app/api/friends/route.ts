@@ -51,7 +51,8 @@ export async function GET(req: NextRequest) {
                 email: true,
                 image: true,
                 bio: true,
-            }
+            },
+            take: 100 // Limit to 100 friends max
         })
 
         // Get friends' active posts

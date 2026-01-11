@@ -41,13 +41,26 @@ export default function ChatPage() {
     // @ts-ignore - NextAuth session typing issue  
     const myId = session?.user?.id as string;
     const fetchIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const lastMessageTimeRef = useRef<string | null>(null);
 
     // Fetch messages and other user info
-    const fetchMessages = useCallback(async () => {
+    const fetchMessages = useCallback(async (isInitial = false) => {
         if (!myId || !otherUserId) return;
 
         try {
-            const res = await fetch(`/api/messages/${otherUserId}`);
+            // For initial load, fetch last 50 messages
+            // For polling, only fetch messages newer than the last one we have
+            let url = `/api/messages/${otherUserId}`;
+
+            if (!isInitial && lastMessageTimeRef.current) {
+                // Incremental update - only new messages
+                url += `?since=${lastMessageTimeRef.current}`;
+            } else {
+                // Initial load - get 50 most recent
+                url += `?take=50`;
+            }
+
+            const res = await fetch(url);
 
             if (!res.ok) {
                 throw new Error('Failed to fetch messages');
@@ -55,17 +68,35 @@ export default function ChatPage() {
 
             const data = await res.json();
 
-            if (Array.isArray(data)) {
-                setMessages(data.reverse().map((msg: any) => ({
+            if (Array.isArray(data) && data.length > 0) {
+                const formattedMessages = data.reverse().map((msg: any) => ({
                     ...msg,
-                    status: 'sent' // Messages from server are considered sent
-                })));
+                    status: 'sent'
+                }));
+
+                if (isInitial) {
+                    // Initial load - replace all messages
+                    setMessages(formattedMessages);
+                    // Update timestamp to latest message
+                    lastMessageTimeRef.current = data[0].createdAt;
+                } else {
+                    // Incremental update - append new messages
+                    setMessages(prev => [...prev, ...formattedMessages]);
+                    // Update timestamp to latest message
+                    if (data[0]) {
+                        lastMessageTimeRef.current = data[0].createdAt;
+                    }
+                }
             }
         } catch (err) {
             console.error('Fetch error:', err);
-            setError('Failed to load messages');
+            if (isInitial) {
+                setError('Failed to load messages');
+            }
         } finally {
-            setLoading(false);
+            if (isInitial) {
+                setLoading(false);
+            }
         }
     }, [myId, otherUserId]);
 
@@ -87,10 +118,13 @@ export default function ChatPage() {
     useEffect(() => {
         if (!myId || !otherUserId) return;
 
-        fetchMessages();
+        // Initial load
+        fetchMessages(true);
 
-        // Poll for new messages every 3 seconds
-        fetchIntervalRef.current = setInterval(fetchMessages, 3000);
+        // Poll for new messages every 3 seconds (now using incremental updates)
+        fetchIntervalRef.current = setInterval(() => {
+            fetchMessages(false); // Incremental poll
+        }, 3000);
 
         return () => {
             if (fetchIntervalRef.current) {
