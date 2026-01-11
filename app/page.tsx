@@ -1,66 +1,33 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import { useSession } from "next-auth/react"
+import { useState, useEffect } from "react"
+import PostComposer from "./components/PostComposer"
+import PostFeed from "./components/PostFeed"
+// @ts-ignore
+import { useLocation } from "@/hooks/useLocation"
 
 export default function Home() {
+  const { data: session } = useSession()
+  const { location, loading } = useLocation()
+  const [refreshTrigger, setRefreshTrigger] = useState(0)
+  const [displayLocation, setDisplayLocation] = useState({ lat: 37.7749, lng: -122.4194 })
+
+  useEffect(() => {
+    if (location) setDisplayLocation(location)
+  }, [location])
+
+  const handlePostCreated = () => {
+    setRefreshTrigger(prev => prev + 1)
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="flex flex-col gap-6 pb-20">
+      {/* We render feed immediately with default or real location */}
+      {/* Composer only for logged in users */}
+      {session && <PostComposer location={displayLocation} onPostCreated={handlePostCreated} />}
+
+      {/* Feed */}
+      <PostFeed location={displayLocation} refreshTrigger={refreshTrigger} />
     </div>
-  );
+  )
 }
