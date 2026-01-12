@@ -61,19 +61,18 @@ export default function PostFeed({ location, refreshTrigger }: { location: { lat
         fetchPosts(true)
     }, [location.lat, location.lng, refreshTrigger])
 
-    // Auto-refresh every 10 seconds with incremental updates (only when visible)
-    useEffect(() => {
-        if (!isVisible) return
-
-        const interval = setInterval(() => {
-            fetchPosts(false) // Incremental poll
-        }, 10000) // Reduced from 5s to 10s
-
-        return () => clearInterval(interval)
-    }, [fetchPosts, isVisible])
+    // Removed auto-refresh to save database bandwidth
 
     return (
         <div className="flex flex-col gap-8 pb-32 pt-4 px-2">
+            <div className="flex justify-center -mb-4">
+                <button
+                    onClick={() => fetchPosts(false)}
+                    className="text-xs font-medium text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/50 px-3 py-1.5 rounded-full"
+                >
+                    ↻ Refresh Feed
+                </button>
+            </div>
             {posts.map((post, index) => (
                 <PostCard
                     key={post.id}

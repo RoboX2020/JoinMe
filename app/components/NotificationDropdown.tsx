@@ -48,17 +48,8 @@ export default function NotificationDropdown() {
         }
     }, [session, isOpen])
 
-    // Auto-refresh every 5 seconds when dropdown is closed
-    useEffect(() => {
-        if (!session || isOpen) return
-
-        const interval = setInterval(() => {
-            fetchRequests()
-            fetchFriendRequests()
-        }, 5000) // 5 seconds
-
-        return () => clearInterval(interval)
-    }, [session, isOpen])
+    // Removed auto-refresh to save database bandwidth
+    // effective-polling: Requests are now triggered only on mount or user interaction
 
     const fetchRequests = async () => {
         setLoading(true)
