@@ -1,11 +1,13 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react'
 import { useState, useEffect } from 'react'
-import { Edit2, MapPin, Users, Link as LinkIcon } from 'lucide-react'
+import { Edit2, MapPin, Users, Link as LinkIcon, Settings } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import ProfileEditForm from '../components/ProfileEditForm'
 
 export default function ProfilePage() {
     const { data: session, update } = useSession()
+    const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [userData, setUserData] = useState<any>(null)
     const [loading, setLoading] = useState(true)
@@ -100,12 +102,22 @@ export default function ProfilePage() {
                 <>
                     {/* Profile Header */}
                     <div className="flex flex-col items-center relative">
-                        <button
-                            onClick={() => setIsEditing(true)}
-                            className="absolute top-0 right-4 bg-zinc-800 hover:bg-zinc-700 text-white p-3 rounded-full transition"
-                        >
-                            <Edit2 size={18} />
-                        </button>
+                        {/* Settings and Edit Buttons */}
+                        <div className="absolute top-0 right-4 flex gap-2">
+                            <button
+                                onClick={() => router.push('/settings')}
+                                className="bg-zinc-800 hover:bg-zinc-700 text-white p-3 rounded-full transition"
+                                aria-label="Settings"
+                            >
+                                <Settings size={18} />
+                            </button>
+                            <button
+                                onClick={() => setIsEditing(true)}
+                                className="bg-zinc-800 hover:bg-zinc-700 text-white p-3 rounded-full transition"
+                            >
+                                <Edit2 size={18} />
+                            </button>
+                        </div>
 
                         <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white/10 overflow-hidden mb-4 shadow-float">
                             <img src={userData?.image || session.user?.image || '/default-avatar.png'} className="w-full h-full object-cover" alt="Profile" />

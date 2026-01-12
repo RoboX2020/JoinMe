@@ -1,9 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Smartphone } from 'lucide-react';
+import { ArrowLeft, Smartphone, Moon, Sun } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useSize, InterfaceSize } from '../contexts/SizeContext';
+import { useTheme } from '../contexts/ThemeContext';
 import InstallPWA from '../components/InstallPWA';
 
 export const dynamic = 'force-dynamic';
@@ -27,6 +28,7 @@ export default function SettingsPage() {
 function SettingsContent() {
     const router = useRouter();
     const { size, setSize } = useSize();
+    const { theme, toggleTheme } = useTheme();
 
     const sizes: { value: InterfaceSize; label: string; description: string }[] = [
         { value: 'small', label: 'Small', description: 'Compact interface with smaller text' },
@@ -35,13 +37,13 @@ function SettingsContent() {
     ];
 
     return (
-        <div className="min-h-screen bg-[#0a0a0f] text-white pb-20">
+        <div className="min-h-screen bg-[#0a0a0f] dark:bg-[#0a0a0f] light:bg-gray-50 text-white dark:text-white light:text-black pb-20">
             {/* Header */}
-            <div className="sticky top-0 z-10 bg-[#0a0a0f]/95 backdrop-blur-sm border-b border-white/10">
+            <div className="sticky top-0 z-10 bg-[#0a0a0f]/95 dark:bg-[#0a0a0f]/95 light:bg-white/95 backdrop-blur-sm border-b border-white/10 dark:border-white/10 light:border-gray-200">
                 <div className="flex items-center gap-3 p-4">
                     <button
                         onClick={() => router.back()}
-                        className="p-2 hover:bg-white/10 rounded-lg transition-all"
+                        className="p-2 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-gray-100 rounded-lg transition-all"
                         aria-label="Go back"
                     >
                         <ArrowLeft className="w-5 h-5" />
@@ -51,8 +53,40 @@ function SettingsContent() {
             </div>
 
             <div className="max-w-2xl mx-auto p-4 space-y-6">
+                {/* Theme Toggle Section */}
+                <section className="bg-white/5 dark:bg-white/5 light:bg-white rounded-2xl p-6 border light:border-gray-200 dark:border-transparent">
+                    <div className="mb-4">
+                        <h2 className="text-lg font-semibold mb-1">Appearance</h2>
+                        <p className="text-sm text-white/60 dark:text-white/60 light:text-gray-600">
+                            Choose your preferred theme
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={toggleTheme}
+                        className="w-full flex items-center justify-between p-4 rounded-xl border-2 border-white/10 dark:border-white/10 light:border-gray-200 bg-white/5 dark:bg-white/5 light:bg-gray-50 hover:border-blue-500 transition-all"
+                    >
+                        <div className="flex items-center gap-3">
+                            {theme === 'dark' ? (
+                                <Moon className="w-5 h-5 text-blue-400" />
+                            ) : (
+                                <Sun className="w-5 h-5 text-blue-500" />
+                            )}
+                            <div className="text-left">
+                                <div className="font-medium">{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</div>
+                                <div className="text-sm text-white/60 dark:text-white/60 light:text-gray-500">
+                                    {theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-12 h-6 rounded-full bg-blue-500 relative">
+                            <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${theme === 'light' ? 'right-1' : 'left-1'}`} />
+                        </div>
+                    </button>
+                </section>
+
                 {/* Interface Size Section */}
-                <section className="bg-white/5 rounded-2xl p-6 space-y-4">
+                <section className="bg-white/5 dark:bg-white/5 light:bg-white rounded-2xl p-6 border light:border-gray-200 dark:border-transparent space-y-4">
                     <div>
                         <h2 className="text-lg font-semibold mb-1">Interface Size</h2>
                         <p className="text-sm text-white/60">

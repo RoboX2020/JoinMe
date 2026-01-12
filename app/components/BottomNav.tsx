@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Users, MessageCircle, User, Settings } from 'lucide-react'
+import { Home, Users, MessageCircle, User } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -14,7 +14,6 @@ export default function BottomNav() {
         { name: 'Find Friends', icon: Users, href: '/explore' },
         { name: 'Messages', icon: MessageCircle, href: '/messages' },
         { name: 'Profile', icon: User, href: '/profile' },
-        { name: 'Settings', icon: Settings, href: '/settings' },
     ]
 
     return (
