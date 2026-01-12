@@ -57,7 +57,7 @@ function SettingsContent() {
                 <section className="bg-card rounded-2xl p-6 border border-border">
                     <div className="mb-4">
                         <h2 className="text-lg font-semibold mb-1">Appearance</h2>
-                        <p className="text-sm text-zinc-600 dark:text-white/60">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
                             Choose your preferred theme
                         </p>
                     </div>
@@ -74,7 +74,7 @@ function SettingsContent() {
                             )}
                             <div className="text-left">
                                 <div className="font-medium">{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</div>
-                                <div className="text-sm text-zinc-600 dark:text-white/60">
+                                <div className="text-sm text-zinc-600 dark:text-zinc-400">
                                     {theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ function SettingsContent() {
                 <section className="bg-card rounded-2xl p-6 border border-border space-y-4">
                     <div>
                         <h2 className="text-lg font-semibold mb-1">Interface Size</h2>
-                        <p className="text-sm text-zinc-600 dark:text-white/60">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
                             Adjust the size of text and UI elements throughout the app
                         </p>
                     </div>

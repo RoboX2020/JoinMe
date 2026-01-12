@@ -34,28 +34,29 @@
   --spacing-lg: 1.5rem;
 }
 
-/* Light Mode - Instagram Style */
+/* Light Mode - Facebook-Inspired Blue Theme */
 html[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #f0f2f5;
+  --foreground: #050505;
 
   /* Semantic tokens for light mode */
-  --card: #f5f5f5;
-  --card-foreground: #000000;
-  --input-bg: #f0f0f0;
-  --input-text: #000000;
+  --card: #ffffff;
+  --card-foreground: #050505;
+  --input-bg: #f0f2f5;
+  --input-text: #050505;
   --border: rgba(0, 0, 0, 0.1);
-  --header-bg: rgba(255, 255, 255, 0.95);
+  --header-bg: rgba(255, 255, 255, 0.98);
 
-  --neon-blue: #0095f6;
-  --neon-purple: #8b5cf6;
+  /* Facebook blue accent */
+  --neon-blue: #1877f2;
+  --neon-purple: #1877f2;
   --glass-border: rgba(0, 0, 0, 0.1);
   --glass-bg: rgba(0, 0, 0, 0.02);
 }
 
 html[data-theme="light"] body {
-  background: #fafafa !important;
-  color: #000000 !important;
+  background: #f0f2f5 !important;
+  color: #050505 !important;
   background-image: none !important;
 }
 
@@ -83,15 +84,15 @@ html[data-theme="light"] .text-white {
 html[data-theme="light"] .text-zinc-300,
 html[data-theme="light"] .text-zinc-400,
 html[data-theme="light"] .text-zinc-500 {
-  color: #666666 !important;
+  color: #65676b !important;
 }
 
 html[data-theme="light"] .glass-panel {
-  @apply bg-white/90 border-gray-200;
+  @apply bg-white border-gray-200;
 }
 
 html[data-theme="light"] .neon-glow {
-  box-shadow: 0 0 20px rgba(0, 149, 246, 0.2);
+  box-shadow: 0 0 20px rgba(24, 119, 242, 0.2);
 }
 
 /* Small Size */
