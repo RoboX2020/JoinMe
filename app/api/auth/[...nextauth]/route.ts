@@ -15,6 +15,14 @@ export const authOptions: AuthOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID || "",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
             allowDangerousEmailAccountLinking: true,
+            authorization: {
+                params: {
+                    prompt: "login",
+                    access_type: "offline",
+                    response_type: "code",
+                    v: "2" // Cache buster
+                }
+            },
             profile(profile) {
                 return {
                     id: profile.sub,

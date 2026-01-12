@@ -52,6 +52,8 @@ function LoginForm() {
     const handleGoogleLogin = async () => {
         setGoogleLoading(true)
         signIn('google', { callbackUrl: '/' })
+            // Force refresh to ensure new env vars are used
+            .then(() => window.location.reload());
     }
 
     return (
