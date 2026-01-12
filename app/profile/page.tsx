@@ -5,6 +5,7 @@ import { Edit2, MapPin, Users, Link as LinkIcon, Settings } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import ProfileEditForm from '../components/ProfileEditForm'
 
+// Forces deployment update - Settings button added
 export default function ProfilePage() {
     const { data: session, update } = useSession()
     const router = useRouter()
