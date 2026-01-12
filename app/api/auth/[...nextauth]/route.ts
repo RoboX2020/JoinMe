@@ -62,39 +62,60 @@ export const authOptions: AuthOptions = {
     },
     callbacks: {
         async signIn({ user, account, profile }) {
+            console.log('👉 SIGNIN CALLBACK', {
+                email: user.email,
+                provider: account?.provider,
+                hasProfile: !!profile
+            });
+
             try {
                 // For OAuth providers
                 if (account?.provider === 'google') {
+                    if (!user.email) {
+                        console.error('❌ No email provided from Google');
+                        return false;
+                    }
+
                     // Make sure user exists
+                    console.log('🔍 Checking for existing user:', user.email);
                     const existingUser = await prisma.user.findUnique({
-                        where: { email: user.email! }
+                        where: { email: user.email }
                     });
+                    console.log('👤 Existing user found:', !!existingUser);
 
                     if (existingUser) {
                         // Update existing user info from Google
+                        console.log('🔄 Updating user info...');
                         await prisma.user.update({
-                            where: { email: user.email! },
+                            where: { email: user.email },
                             data: {
                                 name: user.name || existingUser.name,
                                 image: user.image || existingUser.image,
                                 emailVerified: new Date(),
                             }
                         }).catch(err => {
-                            console.error('Error updating user:', err);
+                            console.error('❌ Error updating user:', err);
                         });
                     }
                 }
                 return true;
             } catch (error) {
-                console.error('SignIn callback error:', error);
-                return true; // Allow signin anyway
+                console.error('❌ SignIn callback error:', error);
+                return true;
             }
         },
         async jwt({ token, user, account, trigger }) {
+            console.log('👉 JWT CALLBACK', {
+                hasToken: !!token,
+                hasUser: !!user,
+                trigger
+            });
+
             // Initial sign in
             if (user) {
                 token.id = user.id;
                 token.email = user.email;
+                console.log('✅ Initial JWT setup:', token);
             }
 
             // Always fetch latest user data
@@ -107,15 +128,23 @@ export const authOptions: AuthOptions = {
 
                     if (dbUser) {
                         token.id = dbUser.id;
+                        console.log('✅ Token ID updated from DB:', dbUser.id);
+                    } else {
+                        console.warn('⚠️ User not found in DB during JWT callback');
                     }
                 } catch (error) {
-                    console.error('JWT callback error:', error);
+                    console.error('❌ JWT callback error:', error);
                 }
             }
 
             return token;
         },
         async session({ session, token }) {
+            console.log('👉 SESSION CALLBACK', {
+                hasToken: !!token,
+                hasSessionUser: !!session.user
+            });
+
             if (token && session.user) {
                 try {
                     // Fetch fresh user data from database
@@ -137,9 +166,12 @@ export const authOptions: AuthOptions = {
                         session.user.name = dbUser.name;
                         session.user.email = dbUser.email;
                         session.user.image = dbUser.image;
+                        console.log('✅ Session populated from DB');
+                    } else {
+                        console.warn('⚠️ User not found in DB during Session callback');
                     }
                 } catch (error) {
-                    console.error('Session callback error:', error);
+                    console.error('❌ Session callback error:', error);
                     // Fallback to token data
                     // @ts-ignore
                     session.user.id = token.id;
