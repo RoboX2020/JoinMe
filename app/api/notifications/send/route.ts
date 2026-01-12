@@ -4,11 +4,18 @@ import webpush from 'web-push'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-webpush.setVapidDetails(
-    'mailto:support@joinme.com',
-    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-    process.env.VAPID_PRIVATE_KEY!
-)
+// Initialize outside handler but check for keys
+if (process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
+    try {
+        webpush.setVapidDetails(
+            'mailto:support@joinme.com',
+            process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+            process.env.VAPID_PRIVATE_KEY
+        )
+    } catch (err) {
+        console.error('VAPID Setup Error:', err)
+    }
+}
 
 export async function POST(req: Request) {
     try {
