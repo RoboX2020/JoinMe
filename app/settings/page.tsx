@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Smartphone } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useSize, InterfaceSize } from '../contexts/SizeContext';
 import InstallPWA from '../components/InstallPWA';
 
@@ -10,6 +11,16 @@ export const dynamic = 'force-dynamic';
 export default function SettingsPage() {
     const router = useRouter();
     const { size, setSize } = useSize();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Prevent SSR render
+    if (!mounted) {
+        return null;
+    }
 
     const sizes: { value: InterfaceSize; label: string; description: string }[] = [
         { value: 'small', label: 'Small', description: 'Compact interface with smaller text' },
