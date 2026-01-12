@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import NotificationDropdown from './NotificationDropdown'
 import InstallPWA from './InstallPWA'
+import { Settings } from 'lucide-react'
 
 export default function Header() {
     const { data: session } = useSession()
@@ -31,13 +32,18 @@ export default function Header() {
 
             {/* Right: Install Button, Profile + Notification (Desktop) */}
             <div className="flex items-center gap-2 md:gap-3 pointer-events-auto shrink-0 ml-auto">
-                {/* Install App Button - Hidden on mobile */}
                 <div className="hidden md:block">
                     <InstallPWA variant="button" />
                 </div>
                 <div className="hidden md:block">
                     <NotificationDropdown />
                 </div>
+
+                {/* Settings Link (Always Visible) */}
+                <Link href="/settings" className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition text-white">
+                    <Settings className="w-5 h-5 md:w-6 md:h-6" />
+                </Link>
+
                 {session ? (
                     <Link href="/profile">
                         <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-border p-0.5">
