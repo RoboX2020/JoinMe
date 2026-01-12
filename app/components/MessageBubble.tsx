@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, Check, CheckCheck, Clock, AlertCircle } from 'lucide-react';
 import { formatMessageTime, getGoogleMapsUrl, getMapboxStaticUrl } from '@/lib/messageUtils';
+import { memo } from 'react';
 
 interface MessageBubbleProps {
     message: {
@@ -20,7 +21,7 @@ interface MessageBubbleProps {
     onImageClick?: (imageUrl: string) => void;
 }
 
-export default function MessageBubble({
+function MessageBubble({
     message,
     isOwn,
     showAvatar = true,
@@ -76,8 +77,8 @@ export default function MessageBubble({
         // Text message
         return (
             <div className={`px-4 py-2.5 rounded-3xl ${isOwn
-                    ? 'bg-blue-600 text-white rounded-br-sm'
-                    : 'bg-zinc-800 text-white rounded-bl-sm'
+                ? 'bg-blue-600 text-white rounded-br-sm'
+                : 'bg-zinc-800 text-white rounded-bl-sm'
                 }`}>
                 <p className="whitespace-pre-wrap break-words">{message.content}</p>
             </div>
@@ -120,3 +121,6 @@ export default function MessageBubble({
         </motion.div>
     );
 }
+
+// Memoize to prevent unnecessary re-renders
+export default memo(MessageBubble)

@@ -16,6 +16,7 @@ interface Post {
 export default function PostFeed({ location, refreshTrigger }: { location: { lat: number, lng: number }, refreshTrigger: number }) {
     const [posts, setPosts] = useState<Post[]>([])
     const [lastFetchTime, setLastFetchTime] = useState<string | null>(null)
+    const [isVisible, setIsVisible] = useState(true)
 
     const fetchPosts = useCallback((isInitial = false) => {
         let url = `/api/posts?lat=${location.lat}&lng=${location.lng}`
@@ -46,19 +47,30 @@ export default function PostFeed({ location, refreshTrigger }: { location: { lat
             .catch(console.error)
     }, [location, lastFetchTime])
 
+    // Page visibility detection
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            setIsVisible(!document.hidden)
+        }
+        document.addEventListener('visibilitychange', handleVisibilityChange)
+        return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }, [])
+
     // Initial fetch
     useEffect(() => {
         fetchPosts(true)
     }, [location.lat, location.lng, refreshTrigger])
 
-    // Auto-refresh every 5 seconds with incremental updates
+    // Auto-refresh every 10 seconds with incremental updates (only when visible)
     useEffect(() => {
+        if (!isVisible) return
+
         const interval = setInterval(() => {
             fetchPosts(false) // Incremental poll
-        }, 5000) // 5 seconds
+        }, 10000) // Reduced from 5s to 10s
 
         return () => clearInterval(interval)
-    }, [fetchPosts])
+    }, [fetchPosts, isVisible])
 
     return (
         <div className="flex flex-col gap-8 pb-32 pt-4 px-2">

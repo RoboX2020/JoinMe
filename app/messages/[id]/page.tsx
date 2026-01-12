@@ -36,6 +36,7 @@ export default function ChatPage() {
     const [gettingLocation, setGettingLocation] = useState(false);
     const [lightboxImage, setLightboxImage] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [isVisible, setIsVisible] = useState(true);
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     // @ts-ignore - NextAuth session typing issue  
@@ -114,24 +115,33 @@ export default function ChatPage() {
             });
     }, [otherUserId]);
 
+    // Page visibility detection
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            setIsVisible(!document.hidden)
+        }
+        document.addEventListener('visibilitychange', handleVisibilityChange)
+        return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }, [])
+
     // Initial fetch and polling
     useEffect(() => {
-        if (!myId || !otherUserId) return;
+        if (!myId || !otherUserId || !isVisible) return;
 
         // Initial load
         fetchMessages(true);
 
-        // Poll for new messages every 3 seconds (now using incremental updates)
+        // Poll for new messages every 5 seconds (reduced from 3s, only when visible)
         fetchIntervalRef.current = setInterval(() => {
             fetchMessages(false); // Incremental poll
-        }, 3000);
+        }, 5000);
 
         return () => {
             if (fetchIntervalRef.current) {
                 clearInterval(fetchIntervalRef.current);
             }
         };
-    }, [myId, otherUserId, fetchMessages]);
+    }, [myId, otherUserId, fetchMessages, isVisible]);
 
     // Auto scroll to bottom
     useEffect(() => {

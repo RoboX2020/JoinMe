@@ -76,6 +76,10 @@ model Message {
   imageUrl  String?  // For image messages
   latitude  Float?   // For location messages
   longitude Float?   // For location messages
+  
+  @@index([senderId, createdAt])
+  @@index([receiverId, createdAt])
+  @@index([senderId, receiverId, createdAt])
 }
 
 model JoinRequest {

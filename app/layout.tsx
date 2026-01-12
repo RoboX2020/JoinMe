@@ -8,7 +8,6 @@ import Header from './components/Header'
 import BottomNav from './components/BottomNav'
 import NotificationManager from './components/NotificationManager'
 import PWARegister from './components/PWARegister'
-import PostComposer from './components/PostComposer' // We'll update this to be FAB
 
 const inter = Inter({ subsets: ['latin'] })
 

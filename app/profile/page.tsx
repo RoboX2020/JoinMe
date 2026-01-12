@@ -1,6 +1,6 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Edit2, MapPin, Users, Link as LinkIcon, Settings } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import ProfileEditForm from '../components/ProfileEditForm'
@@ -15,13 +15,9 @@ export default function ProfilePage() {
     // @ts-ignore
     const userId = session?.user?.id
 
-    useEffect(() => {
-        if (userId) {
-            fetchUserData()
-        }
-    }, [userId])
+    const fetchUserData = useCallback(async () => {
+        if (!userId) return
 
-    const fetchUserData = async () => {
         try {
             const res = await fetch(`/api/users/${userId}`)
             if (res.ok) {
@@ -33,9 +29,13 @@ export default function ProfilePage() {
         } finally {
             setLoading(false)
         }
-    }
+    }, [userId])
 
-    const handleSave = async (formData: any) => {
+    useEffect(() => {
+        fetchUserData()
+    }, [fetchUserData])
+
+    const handleSave = useCallback(async (formData: any) => {
         try {
             const res = await fetch('/api/profile', {
                 method: 'PUT',
@@ -65,7 +65,18 @@ export default function ProfilePage() {
             console.error('Error saving profile:', error)
             throw error
         }
-    }
+    }, [session, update])
+
+    // Memoize parsed data to prevent re-parsing on every render
+    const socialLinks = useMemo(() => {
+        return userData?.accountLinks ? JSON.parse(userData.accountLinks) : {}
+    }, [userData?.accountLinks])
+
+    const interests = useMemo(() => {
+        return userData?.interests
+            ? userData.interests.split(',').map((i: string) => i.trim()).filter(Boolean)
+            : []
+    }, [userData?.interests])
 
     if (!session) {
         return (
@@ -83,9 +94,6 @@ export default function ProfilePage() {
             </div>
         )
     }
-
-    const socialLinks = userData?.accountLinks ? JSON.parse(userData.accountLinks) : {}
-    const interests = userData?.interests ? userData.interests.split(',').map((i: string) => i.trim()).filter(Boolean) : []
 
     return (
         <div className="flex flex-col gap-6 pb-24 pt-4">

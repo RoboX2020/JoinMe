@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { MapPin, MessageCircle } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useState, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -17,7 +17,7 @@ interface Post {
     joinRequests?: { senderId: string, status: string }[]
 }
 
-export default function PostCard({ post, index = 0, onUpdate }: { post: Post, index?: number, onUpdate?: () => void }) {
+function PostCard({ post, index = 0, onUpdate }: { post: Post, index?: number, onUpdate?: () => void }) {
     const { data: session } = useSession()
     const router = useRouter()
     const [isJoining, setIsJoining] = useState(false)
@@ -27,7 +27,7 @@ export default function PostCard({ post, index = 0, onUpdate }: { post: Post, in
     const myRequest = post.joinRequests?.find(r => r.senderId === myId)
     const status = myRequest?.status
 
-    const handleJoin = async (e: React.MouseEvent) => {
+    const handleJoin = useCallback(async (e: React.MouseEvent) => {
         e.stopPropagation()
         setIsJoining(true)
         try {
@@ -42,12 +42,12 @@ export default function PostCard({ post, index = 0, onUpdate }: { post: Post, in
         } finally {
             setIsJoining(false)
         }
-    }
+    }, [post.id, onUpdate])
 
-    const handleMessage = (e: React.MouseEvent) => {
+    const handleMessage = useCallback((e: React.MouseEvent) => {
         e.stopPropagation()
         router.push(`/messages/${post.author.id}`)
-    }
+    }, [router, post.author.id])
 
     const hasImage = !!post.imageUrl
 
@@ -137,3 +137,6 @@ export default function PostCard({ post, index = 0, onUpdate }: { post: Post, in
         )
     }
 }
+
+// Memoize to prevent unnecessary re-renders
+export default memo(PostCard)

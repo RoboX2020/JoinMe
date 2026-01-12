@@ -22,7 +22,14 @@ export async function GET(
                 name: true,
                 email: true,
                 image: true,
-                bio: true
+                bio: true,
+                profession: true,
+                location: true,
+                radiusKm: true,
+                accountLinks: true,
+                interests: true,
+                latitude: true,
+                longitude: true
             }
         })
 
@@ -30,7 +37,12 @@ export async function GET(
             return NextResponse.json({ error: 'User not found' }, { status: 404 })
         }
 
-        return NextResponse.json(user)
+        // Add cache headers for 60 seconds
+        return NextResponse.json(user, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30'
+            }
+        })
     } catch (error) {
         console.error('Error fetching user:', error)
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
