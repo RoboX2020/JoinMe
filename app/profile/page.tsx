@@ -203,11 +203,21 @@ export default function ProfilePage() {
                         </div>
                     )}
 
-                    {/* Sign Out Button */}
-                    <div className="px-2 pt-4">
+                    {/* Log Out */}
+                    <div className="px-2 space-y-3">
+                        {/* Settings Button - Prominent */}
                         <button
-                            onClick={() => signOut()}
-                            className="w-full bg-red-500/10 text-red-400 py-4 rounded-2xl font-bold border border-red-500/20 hover:bg-red-500/20 transition"
+                            onClick={() => router.push('/settings')}
+                            className="w-full bg-card hover:bg-input-bg text-foreground border border-border rounded-2xl p-4 font-bold transition flex items-center justify-center gap-3"
+                        >
+                            <Settings size={20} />
+                            Settings
+                        </button>
+
+                        {/* Log Out Button */}
+                        <button
+                            onClick={() => signOut({ callbackUrl: '/' })}
+                            className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/30 rounded-2xl p-4 font-bold transition"
                         >
                             Log Out
                         </button>
