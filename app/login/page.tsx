@@ -51,9 +51,23 @@ function LoginForm() {
 
     const handleGoogleLogin = async () => {
         setGoogleLoading(true)
-        signIn('google', { callbackUrl: '/' })
-            // Force refresh to ensure new env vars are used
-            .then(() => window.location.reload());
+        try {
+            const result = await signIn('google', {
+                callbackUrl: '/',
+                redirect: false, // Prevent auto-redirect to handle manually
+            })
+
+            if (result?.url) {
+                console.log('🔗 Redirecting to Google Auth:', result.url);
+                window.location.href = result.url;
+            } else {
+                console.error('❌ No redirect URL received');
+                setGoogleLoading(false);
+            }
+        } catch (error) {
+            console.error('❌ Google login error:', error);
+            setGoogleLoading(false);
+        }
     }
 
     return (
