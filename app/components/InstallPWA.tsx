@@ -44,23 +44,38 @@ export default function InstallPWA({ variant = 'button', onDismiss }: InstallPWA
     }, []);
 
     const handleInstallClick = async () => {
-        if (!deferredPrompt) return;
+        // If the browser triggered the 'beforeinstallprompt' event, use it
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                setDeferredPrompt(null);
+                setIsInstallable(false);
+            }
+            return;
+        }
 
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
+        // Fallback: Show manual instructions if prompt isn't available
+        // (This happens on iOS, or if the user is already on PWA, or browser doesn't support it)
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
-        if (outcome === 'accepted') {
-            setDeferredPrompt(null);
-            setIsInstallable(false);
+        if (isIOS) {
+            alert("To install on iOS:\n1. Tap the Share button (square with arrow)\n2. Scroll down and tap 'Add to Home Screen'");
+        } else {
+            alert("To install:\nLook for the 'Install' icon in your browser's address bar (right side).\n\nOR\n\nTap the browser menu (⋮) -> 'Install App' or 'Add to Home screen'.");
         }
     };
 
-    // Don't show if already installed or not installable
-    if (isInstalled || !isInstallable) {
+    // Always render the button (don't hide simply because isInstallable is false, 
+    // because we want to provide the manual instructions fallback!)
+    if (isInstalled) {
         return null;
     }
 
     if (variant === 'banner') {
+        // Only show banner if actually installable (native prompt available) to avoid annoyance
+        if (!isInstallable) return null;
+
         return (
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
                 <div className="flex items-center gap-3 flex-1">
@@ -91,14 +106,17 @@ export default function InstallPWA({ variant = 'button', onDismiss }: InstallPWA
         );
     }
 
-    // Button variant
+    // Button variant (Always visible in Settings, acting as trigger or manual help)
     return (
         <button
             onClick={handleInstallClick}
-            className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all"
+            className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all"
         >
             <Download className="w-5 h-5" />
-            <span className="font-medium">Install as App</span>
+            <div className="text-left">
+                <div className="font-medium">Install App</div>
+                <div className="text-xs text-white/80">Get the native app experience</div>
+            </div>
         </button>
     );
 }
