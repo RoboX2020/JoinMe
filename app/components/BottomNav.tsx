@@ -17,6 +17,9 @@ export default function BottomNav() {
         { name: 'Settings', icon: Settings, href: '/settings' },
     ]
 
+    // Debug log
+    console.log('BottomNav rendering with', navItems.length, 'items on path:', pathname)
+
     return (
         <motion.div
             initial={{ y: 100, opacity: 0 }}
