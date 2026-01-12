@@ -28,8 +28,8 @@ export async function GET(
                 radiusKm: true,
                 accountLinks: true,
                 interests: true,
-                latitude: true,
-                longitude: true
+                currentLat: true,
+                currentLng: true
             }
         })
 
