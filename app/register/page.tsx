@@ -56,8 +56,8 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-zinc-950 p-4">
-            <div className="w-full max-w-md bg-zinc-900 border border-white/10 rounded-2xl p-8 shadow-xl">
+        <div className="min-h-screen flex items-center justify-center bg-background p-4">
+            <div className="w-full max-w-md bg-card border border-border rounded-2xl p-8 shadow-xl">
                 <div className="text-center mb-8">
                     <div className="flex justify-center mb-4">
                         <Image
@@ -68,8 +68,8 @@ export default function RegisterPage() {
                             className="rounded-2xl"
                         />
                     </div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
-                    <p className="text-zinc-400">Join the community today</p>
+                    <h1 className="text-3xl font-bold text-foreground mb-2">Create Account</h1>
+                    <p className="text-zinc-400 dark:text-zinc-400">Join the community today</p>
                 </div>
 
                 <form onSubmit={registerUser} className="space-y-4">
@@ -80,41 +80,41 @@ export default function RegisterPage() {
                     )}
 
                     <div>
-                        <label className="block text-sm font-bold text-white mb-2">Name</label>
+                        <label className="block text-sm font-bold text-foreground mb-2">Name</label>
                         <input
                             type="text"
                             required
                             value={data.name}
                             onChange={e => setData({ ...data, name: e.target.value })}
-                            className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-600"
+                            className="w-full bg-input-bg border border-border rounded-xl px-4 py-3 text-input-text focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-500"
                             placeholder="Your Name"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-white mb-2">Email</label>
+                        <label className="block text-sm font-bold text-foreground mb-2">Email</label>
                         <input
                             type="email"
                             required
                             value={data.email}
                             onChange={e => setData({ ...data, email: e.target.value })}
-                            className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-600"
+                            className="w-full bg-input-bg border border-border rounded-xl px-4 py-3 text-input-text focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-500"
                             placeholder="name@example.com"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-white mb-2">Password</label>
+                        <label className="block text-sm font-bold text-foreground mb-2">Password</label>
                         <input
                             type="password"
                             required
                             minLength={6}
                             value={data.password}
                             onChange={e => setData({ ...data, password: e.target.value })}
-                            className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-600"
+                            className="w-full bg-input-bg border border-border rounded-xl px-4 py-3 text-input-text focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-500"
                             placeholder="••••••••"
                         />
-                        <p className="text-xs text-zinc-500 mt-1">At least 6 characters</p>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-1">At least 6 characters</p>
                     </div>
 
                     <button
@@ -127,8 +127,8 @@ export default function RegisterPage() {
                     </button>
                 </form>
 
-                <div className="mt-8 text-center bg-zinc-800/50 rounded-xl py-3 border border-white/5">
-                    <p className="text-zinc-400 text-sm">
+                <div className="mt-8 text-center bg-card rounded-xl py-3 border border-border">
+                    <p className="text-zinc-400 dark:text-zinc-400 text-sm">
                         Already have an account?{' '}
                         <Link href="/login" className="text-blue-400 hover:text-blue-300 font-semibold hover:underline">
                             Sign In

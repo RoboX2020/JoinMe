@@ -35,12 +35,12 @@ export default function Header() {
                 </div>
                 {session ? (
                     <Link href="/profile">
-                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-white/20 p-0.5">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-border p-0.5">
                             <img src={session.user?.image || '/default-avatar.png'} alt="Me" className="w-full h-full object-cover rounded-full" />
                         </div>
                     </Link>
                 ) : (
-                    <Link href="/api/auth/signin" className="text-xs md:text-sm font-bold bg-white/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full hover:bg-white/20 transition">
+                    <Link href="/api/auth/signin" className="text-xs md:text-sm font-bold bg-input-bg px-3 md:px-4 py-1.5 md:py-2 rounded-full hover:bg-zinc-300 dark:hover:bg-white/20 transition">
                         Login
                     </Link>
                 )}

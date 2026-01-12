@@ -73,7 +73,7 @@ export default function PostComposer({ location, onPostCreated }: { location: { 
         <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl"
+            className="bg-card border border-border rounded-3xl p-4 backdrop-blur-xl"
         >
             <form onSubmit={handleSubmit}>
                 <div className="flex gap-3">
@@ -90,7 +90,7 @@ export default function PostComposer({ location, onPostCreated }: { location: { 
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder="What's happening nearby?"
-                            className="w-full bg-transparent text-white placeholder-zinc-500 text-lg resize-none focus:outline-none min-h-[60px] max-h-[200px]"
+                            className="w-full bg-transparent text-input-text placeholder-zinc-500 dark:placeholder-zinc-500 text-lg resize-none focus:outline-none min-h-[60px] max-h-[200px]"
                             rows={2}
                         />
 
@@ -120,7 +120,7 @@ export default function PostComposer({ location, onPostCreated }: { location: { 
                         </AnimatePresence>
 
                         {/* Actions */}
-                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
                             <input
                                 ref={fileInputRef}
                                 type="file"

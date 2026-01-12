@@ -8,6 +8,14 @@
   --background: #000000;
   --foreground: #ffffff;
 
+  /* Semantic tokens for components */
+  --card: #18181b;
+  --card-foreground: #ffffff;
+  --input-bg: rgba(39, 39, 42, 0.5);
+  --input-text: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --header-bg: rgba(24, 24, 27, 0.9);
+
   /* Cosmic Palette */
   --neon-blue: #3b82f6;
   --neon-purple: #8b5cf6;
@@ -30,6 +38,15 @@
 html[data-theme="light"] {
   --background: #ffffff;
   --foreground: #000000;
+
+  /* Semantic tokens for light mode */
+  --card: #f5f5f5;
+  --card-foreground: #000000;
+  --input-bg: #f0f0f0;
+  --input-text: #000000;
+  --border: rgba(0, 0, 0, 0.1);
+  --header-bg: rgba(255, 255, 255, 0.95);
+
   --neon-blue: #0095f6;
   --neon-purple: #8b5cf6;
   --glass-border: rgba(0, 0, 0, 0.1);
@@ -46,20 +63,21 @@ html[data-theme="light"] body {
 html[data-theme="light"] .bg-zinc-900,
 html[data-theme="light"] .bg-zinc-900\/50,
 html[data-theme="light"] .bg-zinc-900\/80,
+html[data-theme="light"] .bg-black,
 html[data-theme="light"] .bg-black\/80,
 html[data-theme="light"] .bg-white\/5 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: var(--card) !important;
+  border-color: var(--border) !important;
 }
 
 html[data-theme="light"] .bg-zinc-800,
 html[data-theme="light"] .bg-zinc-800\/50 {
-  background-color: rgba(245, 245, 245, 0.9) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: var(--input-bg) !important;
+  border-color: var(--border) !important;
 }
 
 html[data-theme="light"] .text-white {
-  color: #000000 !important;
+  color: var(--foreground) !important;
 }
 
 html[data-theme="light"] .text-zinc-300,

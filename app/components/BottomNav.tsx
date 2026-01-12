@@ -20,7 +20,7 @@ export default function BottomNav() {
         <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex items-center justify-between bg-black/80 dark:bg-white/10 backdrop-blur-xl p-2 rounded-[2rem] shadow-float border border-white/10 w-full pointer-events-auto"
+            className="flex items-center justify-between bg-card backdrop-blur-xl p-2 rounded-[2rem] shadow-float border border-border w-full pointer-events-auto"
         >
             {navItems.map((item) => {
                 const isActive = pathname === item.href
@@ -39,7 +39,7 @@ export default function BottomNav() {
                         )}
                         <item.icon
                             size={24}
-                            className={`z-10 transition-colors duration-300 ${isActive ? 'text-white dark:text-white' : 'text-zinc-500'
+                            className={`z-10 transition-colors duration-300 ${isActive ? 'text-blue-500' : 'text-zinc-500 dark:text-zinc-400'
                                 }`}
                         />
                     </Link>

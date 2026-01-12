@@ -66,8 +66,8 @@ function LoginForm() {
                         className="rounded-2xl"
                     />
                 </div>
-                <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-                <p className="text-zinc-400">Sign in to your account</p>
+                <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
+                <p className="text-zinc-400 dark:text-zinc-400">Sign in to your account</p>
             </div>
 
             <div className="space-y-4">
@@ -99,25 +99,25 @@ function LoginForm() {
                     )}
 
                     <div>
-                        <label className="block text-sm font-bold text-white mb-2">Email</label>
+                        <label className="block text-sm font-bold text-foreground mb-2">Email</label>
                         <input
                             type="email"
                             required
                             value={data.email}
                             onChange={e => setData({ ...data, email: e.target.value })}
-                            className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-600"
+                            className="w-full bg-input-bg border border-border rounded-xl px-4 py-3 text-input-text focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-500"
                             placeholder="name@example.com"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-white mb-2">Password</label>
+                        <label className="block text-sm font-bold text-foreground mb-2">Password</label>
                         <input
                             type="password"
                             required
                             value={data.password}
                             onChange={e => setData({ ...data, password: e.target.value })}
-                            className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-600"
+                            className="w-full bg-input-bg border border-border rounded-xl px-4 py-3 text-input-text focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-zinc-500"
                             placeholder="••••••••"
                         />
                     </div>
@@ -133,8 +133,8 @@ function LoginForm() {
                 </form>
             </div>
 
-            <div className="mt-8 text-center bg-zinc-800/50 rounded-xl py-3 border border-white/5">
-                <p className="text-zinc-400 text-sm">
+            <div className="mt-8 text-center bg-card rounded-xl py-3 border border-border">
+                <p className="text-zinc-400 dark:text-zinc-400 text-sm">
                     Don't have an account?{' '}
                     <Link href="/register" className="text-blue-400 hover:text-blue-300 font-semibold hover:underline">
                         Sign Up
@@ -147,8 +147,8 @@ function LoginForm() {
 
 export default function LoginPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-zinc-950 p-4">
-            <div className="w-full max-w-md bg-zinc-900 border border-white/10 rounded-2xl p-8 shadow-xl">
+        <div className="min-h-screen flex items-center justify-center bg-background p-4">
+            <div className="w-full max-w-md bg-card border border-border rounded-2xl p-8 shadow-xl">
                 <Suspense fallback={<div className="text-white text-center">Loading...</div>}>
                     <LoginForm />
                 </Suspense>

@@ -340,7 +340,7 @@ export default function ChatPage() {
 
     if (!session) {
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-black text-white">
+            <div className="fixed inset-0 flex items-center justify-center bg-background text-foreground">
                 <Loader2 className="animate-spin" size={32} />
             </div>
         );
@@ -349,13 +349,13 @@ export default function ChatPage() {
     const messageGroups = groupMessagesByDate(messages);
 
     return (
-        <div className="fixed inset-0 flex flex-col bg-black text-white z-[100]">
+        <div className="fixed inset-0 flex flex-col bg-background text-foreground z-[100]">
             {/* Header */}
-            <div className="h-16 flex items-center justify-between px-4 bg-zinc-900 border-b border-white/10 shrink-0">
+            <div className="h-16 flex items-center justify-between px-4 bg-card border-b border-border shrink-0">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => router.push('/messages')}
-                        className="hover:bg-white/10 p-2 rounded-full transition-colors"
+                        className="hover:bg-zinc-200 dark:hover:bg-white/10 p-2 rounded-full transition-colors"
                         aria-label="Back to messages"
                     >
                         <ArrowLeft size={20} />
@@ -368,7 +368,7 @@ export default function ChatPage() {
                         >
                             <img
                                 src={otherUser.image || `https://api.dicebear.com/7.x/avataaars/svg?seed=${otherUserId}`}
-                                className="w-10 h-10 rounded-full object-cover border border-white/10"
+                                className="w-10 h-10 rounded-full object-cover border border-border"
                                 alt={otherUser.name || 'User'}
                             />
                             <div>
@@ -413,8 +413,8 @@ export default function ChatPage() {
                             <div key={group.date} className="space-y-2">
                                 {/* Date Header */}
                                 <div className="flex justify-center my-4">
-                                    <div className="bg-zinc-800/50 px-3 py-1 rounded-full">
-                                        <span className="text-xs text-zinc-400 font-medium">{group.date}</span>
+                                    <div className="bg-card px-3 py-1 rounded-full">
+                                        <span className="text-xs text-zinc-400 dark:text-zinc-400 font-medium">{group.date}</span>
                                     </div>
                                 </div>
 
