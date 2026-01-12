@@ -111,19 +111,19 @@ export default function ProfilePage() {
                     {/* Profile Header */}
                     <div className="flex flex-col items-center relative">
                         {/* Settings and Edit Buttons */}
-                        <div className="absolute top-0 right-4 flex gap-2">
+                        <div className="absolute top-0 right-2 md:right-4 flex gap-2">
                             <button
                                 onClick={() => router.push('/settings')}
-                                className="bg-card hover:bg-input-bg text-foreground p-3 rounded-full transition border border-border"
+                                className="bg-card hover:bg-input-bg text-foreground p-2.5 md:p-3 rounded-full transition border-2 border-border shadow-lg"
                                 aria-label="Settings"
                             >
-                                <Settings size={18} />
+                                <Settings size={22} className="md:w-[18px] md:h-[18px]" />
                             </button>
                             <button
                                 onClick={() => setIsEditing(true)}
-                                className="bg-card hover:bg-input-bg text-foreground p-3 rounded-full transition border border-border"
+                                className="bg-card hover:bg-input-bg text-foreground p-2.5 md:p-3 rounded-full transition border-2 border-border shadow-lg"
                             >
-                                <Edit2 size={18} />
+                                <Edit2 size={22} className="md:w-[18px] md:h-[18px]" />
                             </button>
                         </div>
 
