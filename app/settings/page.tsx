@@ -37,13 +37,13 @@ function SettingsContent() {
     ];
 
     return (
-        <div className="min-h-screen bg-[#0a0a0f] dark:bg-[#0a0a0f] light:bg-gray-50 text-white dark:text-white light:text-black pb-20">
+        <div className="min-h-screen bg-background text-foreground pb-20">
             {/* Header */}
-            <div className="sticky top-0 z-10 bg-[#0a0a0f]/95 dark:bg-[#0a0a0f]/95 light:bg-white/95 backdrop-blur-sm border-b border-white/10 dark:border-white/10 light:border-gray-200">
+            <div className="sticky top-0 z-10 bg-header-bg backdrop-blur-sm border-b border-border">
                 <div className="flex items-center gap-3 p-4">
                     <button
                         onClick={() => router.back()}
-                        className="p-2 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-gray-100 rounded-lg transition-all"
+                        className="p-2 hover:bg-zinc-200 dark:hover:bg-white/10 rounded-lg transition-all"
                         aria-label="Go back"
                     >
                         <ArrowLeft className="w-5 h-5" />
@@ -54,17 +54,17 @@ function SettingsContent() {
 
             <div className="max-w-2xl mx-auto p-4 space-y-6">
                 {/* Theme Toggle Section */}
-                <section className="bg-white/5 dark:bg-white/5 light:bg-white rounded-2xl p-6 border light:border-gray-200 dark:border-transparent">
+                <section className="bg-card rounded-2xl p-6 border border-border">
                     <div className="mb-4">
                         <h2 className="text-lg font-semibold mb-1">Appearance</h2>
-                        <p className="text-sm text-white/60 dark:text-white/60 light:text-gray-600">
+                        <p className="text-sm text-zinc-600 dark:text-white/60">
                             Choose your preferred theme
                         </p>
                     </div>
 
                     <button
                         onClick={toggleTheme}
-                        className="w-full flex items-center justify-between p-4 rounded-xl border-2 border-white/10 dark:border-white/10 light:border-gray-200 bg-white/5 dark:bg-white/5 light:bg-gray-50 hover:border-blue-500 transition-all"
+                        className="w-full flex items-center justify-between p-4 rounded-xl border-2 border-border bg-input-bg hover:border-blue-500 transition-all"
                     >
                         <div className="flex items-center gap-3">
                             {theme === 'dark' ? (
@@ -74,7 +74,7 @@ function SettingsContent() {
                             )}
                             <div className="text-left">
                                 <div className="font-medium">{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</div>
-                                <div className="text-sm text-white/60 dark:text-white/60 light:text-gray-500">
+                                <div className="text-sm text-zinc-600 dark:text-white/60">
                                     {theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
                                 </div>
                             </div>
@@ -86,10 +86,10 @@ function SettingsContent() {
                 </section>
 
                 {/* Interface Size Section */}
-                <section className="bg-white/5 dark:bg-white/5 light:bg-white rounded-2xl p-6 border light:border-gray-200 dark:border-transparent space-y-4">
+                <section className="bg-card rounded-2xl p-6 border border-border space-y-4">
                     <div>
                         <h2 className="text-lg font-semibold mb-1">Interface Size</h2>
-                        <p className="text-sm text-white/60">
+                        <p className="text-sm text-zinc-600 dark:text-white/60">
                             Adjust the size of text and UI elements throughout the app
                         </p>
                     </div>
@@ -139,7 +139,7 @@ function SettingsContent() {
                 </section>
 
                 {/* PWA Install Section */}
-                <section className="bg-white/5 rounded-2xl p-6 space-y-4">
+                <section className="bg-card rounded-2xl p-6 space-y-4 border border-border">
                     <div className="flex items-start gap-3">
                         <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg">
                             <Smartphone className="w-5 h-5" />

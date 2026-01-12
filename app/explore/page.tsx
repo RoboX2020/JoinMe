@@ -225,7 +225,7 @@ export default function FindFriendsPage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search friends by email or name..."
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="w-full bg-input-bg border border-border rounded-2xl py-3 pl-12 pr-4 text-input-text placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
 
                 {/* Search Results Dropdown */}
