@@ -4,7 +4,7 @@ import './globals.css'
 import { Providers } from './providers'
 import { SizeProvider } from './contexts/SizeContext'
 import { ThemeProvider } from './contexts/ThemeContext'
-import Header from './components/Header'
+import SiteHeader from './components/SiteHeader'
 import BottomNav from './components/BottomNav'
 import NotificationManager from './components/NotificationManager'
 import PWARegister from './components/PWARegister'
@@ -48,7 +48,7 @@ export default function RootLayout({
             <SizeProvider>
               <div className="flex justify-center min-h-screen relative bg-background text-foreground">
                 <main className="w-full max-w-md lg:max-w-5xl xl:max-w-6xl min-h-screen pb-32 relative shadow-2xl bg-background overflow-hidden">
-                  <Header />
+                  <SiteHeader />
                   <NotificationManager />
                   <PWARegister />
                   <div className="p-4 pt-20">

@@ -7,7 +7,7 @@ import NotificationDropdown from './NotificationDropdown'
 import InstallPWA from './InstallPWA'
 import { Settings } from 'lucide-react'
 
-export default function Header() {
+export default function SiteHeader() {
     const { data: session } = useSession()
 
     return (
