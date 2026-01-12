@@ -1,11 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Smartphone, Moon, Sun } from 'lucide-react';
+import { ArrowLeft, Smartphone, Moon, Sun, Monitor } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useSize, InterfaceSize } from '../contexts/SizeContext';
 import { useTheme } from '../contexts/ThemeContext';
 import InstallPWA from '../components/InstallPWA';
+import PushManager from '../components/PushManager';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -138,21 +140,11 @@ function SettingsContent() {
                     </div>
                 </section>
 
-                {/* PWA Install Section */}
+                {/* App Features Section */}
                 <section className="bg-card rounded-2xl p-6 space-y-4 border border-border">
-                    <div className="flex items-start gap-3">
-                        <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg">
-                            <Smartphone className="w-5 h-5" />
-                        </div>
-                        <div className="flex-1">
-                            <h2 className="text-lg font-semibold mb-1">Install App</h2>
-                            <p className="text-sm text-white/60">
-                                Install JoinMe on your device for quick access and a native app experience
-                            </p>
-                        </div>
-                    </div>
-
+                    <h2 className="text-lg font-semibold mb-1">App Features</h2>
                     <InstallPWA variant="button" />
+                    <PushManager />
                 </section>
 
                 {/* App Info */}

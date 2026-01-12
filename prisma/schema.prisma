@@ -59,6 +59,7 @@ model User {
   joinRequests     JoinRequest[]
   friendsInitiated Friendship[] @relation("FriendshipInitiator")
   friendsReceived  Friendship[] @relation("FriendshipReceiver")
+  pushSubscriptions PushSubscription[]
 }
 
 model Message {
@@ -146,4 +147,16 @@ model Friendship {
   @@unique([userId, friendId])
   @@index([userId, status])
   @@index([friendId, status])
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+  
+  @@index([userId])
 }
