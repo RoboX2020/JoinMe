@@ -10,17 +10,23 @@ export const dynamic = 'force-dynamic';
 
 export default function SettingsPage() {
     const router = useRouter();
-    const { size, setSize } = useSize();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
-    // Prevent SSR render
+    // Prevent SSR render - return early before hooks
     if (!mounted) {
-        return null;
+        return <div className="min-h-screen bg-[#0a0a0f]" />;
     }
+
+    return <SettingsContent />;
+}
+
+function SettingsContent() {
+    const router = useRouter();
+    const { size, setSize } = useSize();
 
     const sizes: { value: InterfaceSize; label: string; description: string }[] = [
         { value: 'small', label: 'Small', description: 'Compact interface with smaller text' },
