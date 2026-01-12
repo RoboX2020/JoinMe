@@ -114,14 +114,14 @@ export default function ProfilePage() {
                         <div className="absolute top-0 right-4 flex gap-2">
                             <button
                                 onClick={() => router.push('/settings')}
-                                className="bg-zinc-800 hover:bg-zinc-700 text-white p-3 rounded-full transition"
+                                className="bg-card hover:bg-input-bg text-foreground p-3 rounded-full transition border border-border"
                                 aria-label="Settings"
                             >
                                 <Settings size={18} />
                             </button>
                             <button
                                 onClick={() => setIsEditing(true)}
-                                className="bg-zinc-800 hover:bg-zinc-700 text-white p-3 rounded-full transition"
+                                className="bg-card hover:bg-input-bg text-foreground p-3 rounded-full transition border border-border"
                             >
                                 <Edit2 size={18} />
                             </button>

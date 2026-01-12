@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
 import NotificationDropdown from './NotificationDropdown'
+import InstallPWA from './InstallPWA'
 
 export default function Header() {
     const { data: session } = useSession()
@@ -28,8 +29,12 @@ export default function Header() {
                 </h1>
             </Link>
 
-            {/* Right: Profile + Notification (Desktop) */}
-            <div className="flex items-center gap-2 md:gap-4 pointer-events-auto shrink-0 ml-auto">
+            {/* Right: Install Button, Profile + Notification (Desktop) */}
+            <div className="flex items-center gap-2 md:gap-3 pointer-events-auto shrink-0 ml-auto">
+                {/* Install App Button - Hidden on mobile */}
+                <div className="hidden md:block">
+                    <InstallPWA variant="button" />
+                </div>
                 <div className="hidden md:block">
                     <NotificationDropdown />
                 </div>
