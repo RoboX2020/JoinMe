@@ -151,8 +151,9 @@ export const authOptions: AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: '/login',
+        error: '/api/auth/error', // Custom error page
     },
-    debug: false, // Set to true to see detailed logs on Vercel
+    debug: process.env.NODE_ENV === 'development', // Enable debug in development
 }
 
 const handler = NextAuth(authOptions)
