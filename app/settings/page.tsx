@@ -5,6 +5,8 @@ import { ArrowLeft, Smartphone } from 'lucide-react';
 import { useSize, InterfaceSize } from '../contexts/SizeContext';
 import InstallPWA from '../components/InstallPWA';
 
+export const dynamic = 'force-dynamic';
+
 export default function SettingsPage() {
     const router = useRouter();
     const { size, setSize } = useSize();
@@ -47,8 +49,8 @@ export default function SettingsPage() {
                                 key={sizeOption.value}
                                 onClick={() => setSize(sizeOption.value)}
                                 className={`w-full text-left p-4 rounded-xl border-2 transition-all ${size === sizeOption.value
-                                        ? 'border-blue-500 bg-blue-500/10'
-                                        : 'border-white/10 hover:border-white/20 bg-white/5'
+                                    ? 'border-blue-500 bg-blue-500/10'
+                                    : 'border-white/10 hover:border-white/20 bg-white/5'
                                     }`}
                             >
                                 <div className="flex items-center justify-between">
@@ -60,8 +62,8 @@ export default function SettingsPage() {
                                     </div>
                                     <div
                                         className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${size === sizeOption.value
-                                                ? 'border-blue-500'
-                                                : 'border-white/30'
+                                            ? 'border-blue-500'
+                                            : 'border-white/30'
                                             }`}
                                     >
                                         {size === sizeOption.value && (
