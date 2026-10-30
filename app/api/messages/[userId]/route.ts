@@ -5,6 +5,7 @@ import { authOptions } from '../../auth/[...nextauth]/route';
 
 export const dynamic = 'force-dynamic';
 
+// The conversation with one specific user.
 export async function GET(request: Request, { params }: { params: Promise<{ userId: string }> }) {
     const session = await getServerSession(authOptions);
     // @ts-ignore

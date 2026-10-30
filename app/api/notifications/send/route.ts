@@ -17,6 +17,7 @@ if (process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
     }
 }
 
+// Push a notification to a user.
 export async function POST(req: Request) {
     try {
         const session = await getServerSession(authOptions)

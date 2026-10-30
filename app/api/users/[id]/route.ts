@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { prisma } from '@/lib/prisma'
 
+// One user's public profile.
 export async function GET(
     req: Request,
     { params }: { params: Promise<{ id: string }> }

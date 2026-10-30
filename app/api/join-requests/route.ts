@@ -10,6 +10,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 export const dynamic = 'force-dynamic';
 
 // GET /api/join-requests - Get join requests for current user's posts
+// List join requests for your activities.
 export async function GET(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)
@@ -69,6 +70,7 @@ export async function GET(req: NextRequest) {
 }
 
 // POST /api/join-requests - Create a join request
+// Ask to join someone's activity.
 export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
     // @ts-ignore
@@ -135,6 +137,7 @@ export async function POST(request: Request) {
 }
 
 // PUT /api/join-requests - Update a join request
+// Accept or decline a join request.
 export async function PUT(request: Request) {
     const session = await getServerSession(authOptions);
     // @ts-ignore

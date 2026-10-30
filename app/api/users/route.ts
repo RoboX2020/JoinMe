@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma'
 export const dynamic = 'force-dynamic'
 
 // GET /api/users - Get all users on the platform
+// List users (browse/admin).
 export async function GET(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)

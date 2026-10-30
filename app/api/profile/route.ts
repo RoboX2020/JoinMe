@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { prisma } from '@/lib/prisma'
 
+// Save edits to your own profile.
 export async function PUT(req: Request) {
     try {
         const session = await getServerSession(authOptions)

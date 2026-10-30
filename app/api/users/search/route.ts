@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma'
 export const dynamic = 'force-dynamic'
 
 // GET /api/users/search - Search users by email or name
+// Search users by name.
 export async function GET(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)

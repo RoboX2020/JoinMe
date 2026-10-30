@@ -10,6 +10,7 @@ import { prisma } from '@/lib/prisma'
 export const dynamic = 'force-dynamic'
 
 // GET /api/friends - Get all friends and their recent posts
+// List your friends and pending requests.
 export async function GET(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)
@@ -116,6 +117,7 @@ export async function GET(req: NextRequest) {
 }
 
 // POST /api/friends - Add a friend by email or friendId
+// Send a friend request.
 export async function POST(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)

@@ -8,6 +8,7 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
+// Publish a post to the local feed.
 export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
     // @ts-ignore
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
     return NextResponse.json(post);
 }
 
+// Read the nearby-posts feed.
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const lat = parseFloat(searchParams.get('lat') || '0');

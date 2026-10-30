@@ -9,6 +9,7 @@ import { prisma } from '@/lib/prisma'
 export const dynamic = 'force-dynamic'
 
 // GET /api/users/nearby - Find nearby users
+// Users near a location - powers the explore map.
 export async function GET(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)

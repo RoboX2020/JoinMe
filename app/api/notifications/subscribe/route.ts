@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
+// Register this device for push notifications.
 export async function POST(req: Request) {
     try {
         const session = await getServerSession(authOptions)

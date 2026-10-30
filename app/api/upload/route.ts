@@ -5,6 +5,7 @@ import { compressImage, validateImage } from '@/lib/imageUtils';
 
 export const dynamic = 'force-dynamic';
 
+// Receive an uploaded image and store it.
 export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
     // @ts-ignore

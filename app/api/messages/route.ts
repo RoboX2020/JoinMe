@@ -8,6 +8,7 @@ import { authOptions } from '../auth/[...nextauth]/route';
 
 export const dynamic = 'force-dynamic';
 
+// Send a chat message.
 export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
     // @ts-ignore
@@ -97,6 +98,7 @@ export async function POST(request: Request) {
     }
 }
 
+// Fetch your conversations / messages.
 export async function GET(request: Request) {
     const session = await getServerSession(authOptions);
     // @ts-ignore
