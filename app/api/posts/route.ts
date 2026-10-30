@@ -1,3 +1,6 @@
+// ====================================================================
+// route.ts - the local feed: read nearby posts and publish new ones.
+// ====================================================================
 import { authOptions } from '../auth/[...nextauth]/route';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';

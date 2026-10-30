@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// profile/[id]/page.tsx - another user's profile page.
+// ====================================================================
 import { useSession, signOut } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { Edit2, MapPin, Users, Link as LinkIcon, MessageCircle } from 'lucide-react'

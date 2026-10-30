@@ -1,3 +1,7 @@
+// ====================================================================
+// route.ts - the sign-in/sign-up/session endpoint (NextAuth handles
+//  every auth request here).
+// ====================================================================
 import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"

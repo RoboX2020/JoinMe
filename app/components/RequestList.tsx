@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// RequestList.tsx - incoming friend/join requests awaiting your
+//  answer.
+// ====================================================================
 import { useEffect, useState } from 'react'
 import { Bell, X, Check, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'

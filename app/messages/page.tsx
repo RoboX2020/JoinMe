@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// messages/page.tsx - your conversations list.
+// ====================================================================
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'

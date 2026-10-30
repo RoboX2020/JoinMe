@@ -1,4 +1,9 @@
 'use client'
+// ====================================================================
+// %5Bid%5D/page.tsx - an accidental duplicate of the chat page (the
+//  folder name is a URL-encoded '[id]', created by a bad rename). Next.js
+//  doesn't route it; kept as-is intentionally.
+// ====================================================================
 import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'

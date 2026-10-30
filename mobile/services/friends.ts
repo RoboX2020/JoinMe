@@ -1,3 +1,6 @@
+// ====================================================================
+// friends.ts - mobile friend-list and friend-request calls.
+// ====================================================================
 import api from './api';
 
 export const friendsService = {

@@ -1,4 +1,8 @@
 'use client';
+// ====================================================================
+// InstallPWA.tsx - the 'install this app on your phone' prompt
+//  (JoinMe works as an installable web app).
+// ====================================================================
 
 import { useEffect, useState } from 'react';
 import { Download, X } from 'lucide-react';

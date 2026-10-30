@@ -1,3 +1,7 @@
+// ====================================================================
+// AuthContext.tsx - keeps the signed-in user available throughout the
+//  mobile app.
+// ====================================================================
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { authService } from '../services/auth';
 import { getToken, deleteToken } from '../services/api';

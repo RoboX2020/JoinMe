@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// PostCard.tsx - one post in the feed: text, image, author, actions.
+// ====================================================================
 import { motion } from 'framer-motion'
 import { MapPin, MessageCircle } from 'lucide-react'
 import { useSession } from 'next-auth/react'

@@ -1,4 +1,7 @@
 'use client';
+// ====================================================================
+// settings/page.tsx - your account and app settings.
+// ====================================================================
 
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Smartphone, Moon, Sun, Monitor } from 'lucide-react';

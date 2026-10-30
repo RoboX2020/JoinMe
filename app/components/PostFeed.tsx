@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// PostFeed.tsx - the scrolling list of nearby posts.
+// ====================================================================
 import { useEffect, useState, useCallback } from 'react'
 import PostCard from './PostCard'
 

@@ -1,3 +1,6 @@
+// ====================================================================
+// route.ts - change one friendship: accept, decline, or remove.
+// ====================================================================
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'

@@ -1,3 +1,6 @@
+// ====================================================================
+// auth.ts - mobile sign-in/sign-up calls.
+// ====================================================================
 import api, { saveToken, deleteToken } from './api';
 
 interface LoginCredentials {

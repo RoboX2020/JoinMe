@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// PostComposer.tsx - the 'what's happening here?' box for writing a
+//  location-tagged post.
+// ====================================================================
 import { useState, useRef } from 'react'
 import { Image as ImageIcon, X, Loader2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'

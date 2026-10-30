@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// ImageLightbox.tsx - tap an image to view it full-screen.
+// ====================================================================
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download } from 'lucide-react';

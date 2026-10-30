@@ -1,3 +1,7 @@
+// ====================================================================
+// api.ts - the mobile app's base for talking to the JoinMe server
+//  (shared request helper with auth).
+// ====================================================================
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 

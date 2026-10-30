@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// MessageInput.tsx - the chat box: type, attach an image, send.
+// ====================================================================
 import { useState, useRef, KeyboardEvent } from 'react';
 import { Send, Image as ImageIcon, MapPin, Loader2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -1,3 +1,7 @@
+// ====================================================================
+// UserCard.tsx - a person card (avatar, name, distance) used in
+//  explore and friends lists.
+// ====================================================================
 export default function UserCard({ user }: { user: any }) {
     if (!user) return null;
     return (

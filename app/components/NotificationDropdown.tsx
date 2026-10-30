@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// NotificationDropdown.tsx - the bell menu: friend requests, messages
+//  and activity, all in one dropdown.
+// ====================================================================
 import { useEffect, useState } from 'react'
 import { Bell, Check, X, Loader2, UserPlus } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'

@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// profile/page.tsx - your own profile: your info, posts and friends.
+// ====================================================================
 import { useSession, signOut } from 'next-auth/react'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Edit2, MapPin, Users, Link as LinkIcon, Settings } from 'lucide-react'

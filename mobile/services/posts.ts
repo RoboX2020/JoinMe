@@ -1,3 +1,6 @@
+// ====================================================================
+// posts.ts - mobile feed calls (read and publish nearby posts).
+// ====================================================================
 import api from './api';
 
 export const postsService = {

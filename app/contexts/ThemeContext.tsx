@@ -1,4 +1,8 @@
 'use client';
+// ====================================================================
+// ThemeContext.tsx - shares the light/dark theme choice across the
+//  app.
+// ====================================================================
 
 import { createContext, useContext, useEffect, useState } from 'react';
 

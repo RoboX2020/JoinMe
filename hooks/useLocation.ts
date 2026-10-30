@@ -1,3 +1,7 @@
+// ====================================================================
+// useLocation.ts - gets the user's GPS position (with permission) and
+//  keeps it updated, powering everything 'nearby'.
+// ====================================================================
 import { useState, useEffect } from 'react'
 
 export function useLocation() {

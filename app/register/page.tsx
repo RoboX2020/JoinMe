@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// register/page.tsx - the create-account page.
+// ====================================================================
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'

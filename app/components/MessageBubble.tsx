@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// MessageBubble.tsx - one chat message bubble (yours vs theirs, with
+//  images and timestamps).
+// ====================================================================
 import { motion } from 'framer-motion';
 import { MapPin, Check, CheckCheck, Clock, AlertCircle } from 'lucide-react';
 import { formatMessageTime, getGoogleMapsUrl, getMapboxStaticUrl } from '@/lib/messageUtils';

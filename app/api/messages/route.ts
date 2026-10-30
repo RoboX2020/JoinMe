@@ -1,3 +1,6 @@
+// ====================================================================
+// route.ts - chat messages: fetch a conversation and send a message.
+// ====================================================================
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';

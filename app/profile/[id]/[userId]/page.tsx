@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// [userId]/page.tsx - a user's profile as seen from a specific context
+//  (e.g. via a post or request).
+// ====================================================================
 import { useSession, signOut } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { Edit2, MapPin, Users, Link as LinkIcon, MessageCircle } from 'lucide-react'

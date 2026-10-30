@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// ProfileEditForm.tsx - the form for editing your own profile.
+// ====================================================================
 import { useState } from 'react'
 import { Camera, Loader2 } from 'lucide-react'
 import { motion } from 'framer-motion'

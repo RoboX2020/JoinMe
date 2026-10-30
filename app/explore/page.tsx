@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// explore/page.tsx - find people: browse and search users near you
+//  to friend or join.
+// ====================================================================
 import { useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { Users, Search, UserPlus, Loader2 } from 'lucide-react'

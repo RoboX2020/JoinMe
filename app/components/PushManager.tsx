@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// PushManager.tsx - sets up browser push notifications (asks
+//  permission, registers the subscription).
+// ====================================================================
 
 import { useState, useEffect } from 'react'
 import { Bell, BellOff, Loader2 } from 'lucide-react'

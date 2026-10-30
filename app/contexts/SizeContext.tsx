@@ -1,4 +1,8 @@
 'use client';
+// ====================================================================
+// SizeContext.tsx - shares font/UI size preferences across the app
+//  (accessibility).
+// ====================================================================
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 

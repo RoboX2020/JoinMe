@@ -1,3 +1,7 @@
+// ====================================================================
+// imageUtils.ts - shrinks and compresses photos before upload so
+//  they're fast to send and store.
+// ====================================================================
 /**
  * Image utility functions for compression and optimization
  */

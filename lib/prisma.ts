@@ -1,3 +1,7 @@
+// ====================================================================
+// prisma.ts - the single shared database connection (Prisma ORM) every
+//  API route uses.
+// ====================================================================
 import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as {

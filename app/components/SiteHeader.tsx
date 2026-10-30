@@ -1,3 +1,7 @@
+// ====================================================================
+// SiteHeader.tsx - the top bar on every page: logo, navigation,
+//  notifications, profile menu.
+// ====================================================================
 // Forces deployment update - Settings button added
 'use client'
 import { useSession } from 'next-auth/react'

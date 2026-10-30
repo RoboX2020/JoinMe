@@ -1,4 +1,7 @@
 'use client'
+// ====================================================================
+// messages/[id]/page.tsx - one conversation: the live chat view.
+// ====================================================================
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { ArrowLeft, Loader2 } from 'lucide-react';

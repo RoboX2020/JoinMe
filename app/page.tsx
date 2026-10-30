@@ -1,4 +1,8 @@
 'use client'
+// ====================================================================
+// page.tsx - the JoinMe home feed: nearby posts and what's happening
+//  around you.
+// ====================================================================
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
 import PostComposer from "./components/PostComposer"
